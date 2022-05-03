@@ -18,19 +18,21 @@ module.exports = new SlashCommand({
 
 ## Options and Description
 
-| Command Options   | Description                              | Type                                 | Required |
-| ----------------- | ---------------------------------------- | ------------------------------------ | -------- |
-| name              | Name of the command                      | `string`                             | `Yes`    |
-| description       | Description of the command               | `string`                             | `Yes`    |
-| category          | Category of the command                  | `string`                             | `Yes`    |
-| developer         | If the command is only for the developer | `boolean`                            | `No`     |
-| nsfw              | if the command is NSFW                   | `boolean`                            | `No`     |
-| userPermissions   | Required User Permission                 | `PermissionResolvable[]`             | `No`     |
-| myPermissions     | My Required Permissions                  | `PermissionResolvable[]`             | `No`     |
-| options           | Options for the command                  | `ApplicationCommandOptionData[]`     | `No`     |
-| type              | Type of the command                      | `ApplicationCommandTypes.CHAT_INPUT` | `No`     |
-| defaultPermission | Role Permission Checking                 | `BaseApplicationCommandData`         | `No`     |
-| run               | Running The Command                      | `any`                                | `Yes`    |
+| Command Options   | Description                                        | Type                                 | Required |
+| ----------------- | -------------------------------------------------- | ------------------------------------ | -------- |
+| name              | Name of the command                                | `string`                             | `Yes`    |
+| description       | Description of the command                         | `string`                             | `Yes`    |
+| category          | Category of the command                            | `string`                             | `Yes`    |
+| developerCommand  | If the command is only for the developer           | `boolean`                            | `No`     |
+| nsfwCommand       | if the command is NSFW                             | `boolean`                            | `No`     |
+| adminCommand      | If the command is only for the admin of the server | `boolean`                            | `No`     |
+| guildCommand      | if the command can only be used in some guilds     | `boolean`                            | `No`     |
+| userPermissions   | Required User Permission                           | `PermissionResolvable[]`             | `No`     |
+| myPermissions     | My Required Permissions                            | `PermissionResolvable[]`             | `No`     |
+| options           | Options for the command                            | `ApplicationCommandOptionData[]`     | `No`     |
+| type              | Type of the command                                | `ApplicationCommandTypes.CHAT_INPUT` | `No`     |
+| defaultPermission | Role Permission Checking                           | `BaseApplicationCommandData`         | `No`     |
+| run               | Running The Command                                | `any`                                | `Yes`    |
 
 ## Run Options
 

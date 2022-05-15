@@ -21,7 +21,7 @@ module.exports.config = {
 };
 ```
 
-- Structures/Utils/SlashCommands - Server Only Commands
+- Structures/Client: line 118 - Server Only Commands
 
 ```js
 this.client.on("ready", async () => {

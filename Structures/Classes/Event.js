@@ -5,10 +5,9 @@ const ExtendedClient = require("../Client");
  */
 module.exports = class Event {
   /**
-   * @param {Key} event 
-   * @param {(client: ExtendedClient, ...args: import("discord.js").ClientEvents[Key])} run 
+   * @param {{ event: Key, run: (client: ExtendedClient, ...args: import("discord.js").ClientEvents[Key]) => any}}
    */
-  constructor(event, run) {
+  constructor({ event, run }) {
     this.event = event;
     this.run = run;
   }

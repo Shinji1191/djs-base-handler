@@ -20,6 +20,7 @@ module.exports = new SlashCommand({
       description: "Get this commands information.",
       type: "STRING",
       required: false,
+      autocomplete: true
     },
   ],
   run: async ({ client, interaction }) => {

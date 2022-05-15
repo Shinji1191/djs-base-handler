@@ -149,5 +149,24 @@ module.exports = new Event({
   
       command.run({ client, interaction });
     }
+
+    if (interaction.isAutocomplete()) {
+      if (interaction.commandName === "help") {
+        const commandOption = interaction.options.getString("command")
+        const commands = [...client.slashCommands.values()]
+
+        let responses = []
+        commands.forEach(({ name }) => {
+          responses.push({
+            name: name,
+            value: name,
+          })
+        })
+
+        let filtered = responses.filter((x) => x.name?.includes(commandOption.toLowerCase())).sort()
+
+        interaction.respond(filtered.map((x) => ({ name: x.name, value: x.name })).slice(0, 25))
+      }
+    }
   }
 })

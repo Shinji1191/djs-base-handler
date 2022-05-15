@@ -37,7 +37,7 @@ module.exports = class ExtendedClient extends Client {
 
   async start() {
     this.login(this.config.token);
-    this.loadFiles()
+    await this.loadFiles()
     require("./Utils/ErrorHandler")(this)
   }
 

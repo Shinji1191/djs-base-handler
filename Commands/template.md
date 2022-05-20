@@ -41,3 +41,9 @@ module.exports = new Command({
 | `client`  | ExtendedClient   |
 | `message` | Message<boolean> |
 | `args`    | string[]         |
+  
+## How to use the run option
+```diff
+- run: async (client, message, args) => {}
++ run: async ({ client, message, args }) => {}
+```

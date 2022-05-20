@@ -42,6 +42,12 @@ module.exports = new SlashCommand({
 | `interaction` | ExtendedInteraction              |
 | `args`        | CommandInteractionOptionResolver |
 
+## How to use the run options
+```diff
+- run: async (client, message, args) => {}
++ run: async ({ client, message, args }) => {}
+```
+
 ## Extras
 
 - Do not use `interaction.followUp`

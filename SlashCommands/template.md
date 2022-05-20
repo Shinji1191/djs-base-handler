@@ -45,7 +45,7 @@ module.exports = new SlashCommand({
 ## How to use the run options
 ```diff
 - run: async (client, message, args) => {}
-+ run: async ({ client, message, args }) => {}
++ run: async ({ client, interaction, args }) => {}
 ```
 
 ## Extras

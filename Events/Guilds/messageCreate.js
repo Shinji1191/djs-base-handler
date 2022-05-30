@@ -53,7 +53,7 @@ module.exports = new Event({
       ]
     })
     
-    if (config?.nsfw && !message.channel.nsfw)
+    if (config?.nsfw && message.channel.type === "GUILD_TEXT" && !message.channel.nsfw)
       return message.reply({
         embeds: [
           new MessageEmbed()

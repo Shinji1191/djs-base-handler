@@ -7,6 +7,9 @@ module.exports = new Command({
   name: "ping",
   description: "Shows the bots websocket ping, message edit ping, and uptime.",
   category: "Bot",
+  permissions: {
+    me: ["EMBED_LINKS", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
+  },
   run: async ({ client, message }) => {
     let circles = {
       good: "🟢",

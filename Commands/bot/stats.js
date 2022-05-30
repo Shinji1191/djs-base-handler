@@ -14,6 +14,9 @@ module.exports = new Command({
   description: "Get Developer and Bot statistics",
   category: "Bot",
   aliases: ["stats"],
+  permissions: {
+    me: ["EMBED_LINKS", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
+  },
   run: async ({ client, message }) => {
     const cpu = os.cpus()[0];
     const memory = process.memoryUsage();

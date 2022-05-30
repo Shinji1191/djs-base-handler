@@ -28,9 +28,11 @@ module.exports = new Event({
           });
         } else if (option.value) args.push(option.value);
       }
+
+      const { permissions, config } = cmd
   
       if (
-        cmd.developerCommand &&
+        config?.developer &&
         !client.config.developerIDs?.includes(interaction.user.id)
       )
         return interaction.reply({
@@ -47,7 +49,7 @@ module.exports = new Event({
         });
   
       if (
-        cmd.guildCommand &&
+        config?.guild &&
         !client.config.guildIDs?.includes(interaction.guild.id)
       )
         return interaction.reply({
@@ -62,7 +64,7 @@ module.exports = new Event({
         });
   
       if (
-        cmd.guildOwnerCommand &&
+        config?.owner &&
         interaction.guild.ownerId !== interaction.user.id
       )
         return interaction.reply({
@@ -74,24 +76,9 @@ module.exports = new Event({
               )
               .setColor("RED"),
           ],
-        });
+        })
   
-      if (
-        cmd.adminCommand &&
-        !interaction.memberPermissions.has("ADMINISTRATOR")
-      )
-        return interaction.reply({
-          embeds: [
-            new MessageEmbed()
-              .setTitle("Admin Command")
-              .setDescription(
-                `This command is command can only be run by the admin of this server.`
-              )
-              .setColor("RED"),
-          ],
-        });
-  
-      if (cmd.nsfwCommand && !interaction.channel.nsfw)
+      if (config?.nsfw && interaction.channel.type === "GUILD_TEXT" && !interaction.channel.nsfw)
         return interaction.reply({
           embeds: [
             new MessageEmbed()
@@ -103,7 +90,7 @@ module.exports = new Event({
           ],
         });
   
-      if (!interaction.memberPermissions.has(cmd.userPermissions || []))
+      if (!interaction.memberPermissions.has(permissions?.user || []))
         return interaction.reply({
           embeds: [
             new MessageEmbed()
@@ -113,7 +100,7 @@ module.exports = new Event({
               )
               .addField(
                 "Required Permissions",
-                `\`\`\`${cmd.userPermissions
+                `\`\`\`${permissions?.user
                   .map((perm) => nicerPermissions(perm))
                   .join("\n")}\`\`\``
               )
@@ -122,7 +109,7 @@ module.exports = new Event({
           ephemeral: true,
         });
   
-      if (!interaction.guild.me.permissions.has(cmd.myPermissions || []))
+      if (!interaction.guild.me.permissions.has(permissions?.me || []))
         return interaction.reply({
           embeds: [
             new MessageEmbed()
@@ -132,7 +119,7 @@ module.exports = new Event({
               )
               .addField(
                 "Required Permissions",
-                `\`\`\`${cmd.myPermissions
+                `\`\`\`${permissions?.me
                   .map((perm) => nicerPermissions(perm))
                   .join("\n")}\`\`\``
               )

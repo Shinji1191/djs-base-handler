@@ -15,6 +15,9 @@ module.exports = new Command({
   aliases: ["h", "cmd", "cmds"],
   category: "bot",
   examples: ["[command name]", "[command alias]"],
+  permissions: {
+    me: ["EMBED_LINKS", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
+  },
   run: async ({ client, message, args }) => {
     const prefix = client.config.prefix;
     if (!args.length) {
@@ -231,6 +234,8 @@ module.exports = new Command({
           ],
         });
 
+      const { config, permissions } = command
+
       const deleteButton = new MessageActionRow().addComponents(
           new MessageButton()
             .setCustomId("delete")
@@ -273,30 +278,23 @@ module.exports = new Command({
           },
           {
             name: "Developer Command",
-            value: `\`\`\`${command.developerCommand ? "Yes" : "No"}\`\`\``
+            value: `\`\`\`${config?.developer ? "Yes" : "No"}\`\`\``
           },
           {
             name: "Guild Only Command",
-            value: `\`\`\`${command.guildCommand ? "Yes" : "No"}\`\`\``
+            value: `\`\`\`${config?.guild ? "Yes" : "No"}\`\`\``
           },
           {
             name: "Nsfw Command",
-            value: `\`\`\`${command.nsfwCommand ? "Yes" : "No"}\`\`\``,
-            inline: true
+            value: `\`\`\`${config?.nsfw ? "Yes" : "No"}\`\`\``,
           },
           {
             name: "Owner Command",
-            value: `\`\`\`${command.guildOwnerCommand ? "Yes" : "No"}\`\`\``,
-            inline: true
-          },
-          {
-            name: "Admin Command",
-            value: `\`\`\`${command.adminCommand ? "Yes" : "No"}\`\`\``,
-            inline: true
+            value: `\`\`\`${config?.owner ? "Yes" : "No"}\`\`\``,
           },
           {
             name: "Permissions Needed (User)",
-            value: `\`\`\`${command.userPermissions ? command.userPermissions.map((perm) => nicerPermissions(perm.toString())) : "No permissions needed"}\`\`\``,
+            value: `\`\`\`${permissions?.user ? permissions?.user.map((perm) => nicerPermissions(perm.toString())) : "No permissions needed"}\`\`\``,
             inline: true
           },
           {
@@ -306,7 +304,7 @@ module.exports = new Command({
           },
           {
             name: "Permissions Needed (Me)",
-            value: `\`\`\`${command.myPermissions ? command.myPermissions.map((perm) => nicerPermissions(perm.toString())) : "No permissions needed"}\`\`\``,
+            value: `\`\`\`${permissions?.me ? permissions?.me.map((perm) => nicerPermissions(perm.toString())) : "No permissions needed"}\`\`\``,
             inline: true
           },
         )

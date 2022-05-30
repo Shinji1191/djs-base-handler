@@ -1,35 +1,46 @@
 import {
-  GuildMember,
   Message,
   PermissionResolvable,
-  TextChannel,
 } from "discord.js";
 import ExtendedClient from "../Client";
 
-interface ExtendedMessage extends Message {
-  member: GuildMember;
-}
-
 interface RunOptions {
   client: ExtendedClient;
-  message: ExtendedMessage;
+  message: Message;
   args: string[];
 }
 
 type RunFunction = (options: RunOptions) => any;
 
 export type CommandType = {
+  /** Name of the command */
   name: string;
+  /** Description of the command */
   description: string;
-  aliases?: string[];
+  /** Category of the command */
   category: string;
+  /** Aliases for the command */
+  aliases?: string[];
+  /** Examples for the command */
   examples?: string[];
-  userPermissions?: PermissionResolvable[];
-  myPermissions?: PermissionResolvable[];
-  developerCommand?: boolean
-  adminCommand?: boolean
-  guildCommand?: boolean
-  nsfwCommand?: boolean
-  guildOwnerCommand?: boolean
+  /** Permissions for the command */
+  permissions?: {
+    /** Checks if I have this permission(s) */
+    me?: PermissionResolvable[]
+    /** Checks if the user have this permission(s) */
+    user?: PermissionResolvable[]
+  }
+  /** Configuration For The Command */
+  config?: {
+    /** Checks if the person who ran this command is the developer */
+    developer?: boolean
+    /** Checks if the person who ran this command is the owner of the server */
+    owner?: boolean
+    /** Checks if the channel is NSFW enabled */
+    nsfw?: boolean
+    /** Checks if the command is a guild only */
+    guild?: boolean
+  }
+  /** Running The Command */
   run: RunFunction;
 };

@@ -8,6 +8,9 @@ module.exports = new Command({
   description: "Shows the bots uptime",
   category: "Bot",
   aliases: ["up"],
+  permissions: {
+    me: ["EMBED_LINKS", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
+  },
   async run({ client, message }) {
     const systemUptime = ms(os.uptime() * 1000)
     const botUptime = ms(client.uptime)

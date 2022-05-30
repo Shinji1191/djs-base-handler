@@ -6,7 +6,9 @@ module.exports = new Command({
   description: "FREE NITROOO!!!",
   category: "fun",
   aliases: ["freenitro"],
-  myPermissions: ["EMBED_LINKS", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"],
+  permissions: {
+    me: ["EMBED_LINKS", "SEND_MESSAGES", "READ_MESSAGE_HISTORY"]
+  },
   run: async ({ message }) => {
     const nitro = new MessageEmbed()
       .setTitle("You've been gifted a subscription!")
